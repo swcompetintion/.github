@@ -3,8 +3,11 @@
 
 * 용량 문제로 fastapi만 cd 러너 설정함 *
 
-# OAuth 2.0 Authorization Code Flow
+# OAuth 2.0 Flow
 <img width="827" height="382" alt="image" src="https://github.com/user-attachments/assets/b57da631-69fa-4f44-9fc2-ca79b26c8c45" />
+
+# MongoDb
+<img width="726" height="470" alt="image" src="https://github.com/user-attachments/assets/19bc3067-1a91-4a4c-8997-f29e03e1acf0" />
 
 
 # frontend
