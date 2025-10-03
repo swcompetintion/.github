@@ -1,9 +1,7 @@
-
+* 용량 문제로 fastapi만 cd 러너 설정함 *
 
 # 아키텍쳐
 <img width="647" height="493" alt="image" src="https://github.com/user-attachments/assets/06cbd86e-3910-45d2-86e0-1095c07a306d" />
-
-* 용량 문제로 fastapi만 cd 러너 설정함 *
 
 # OAuth 2.0 Flow
 <img width="827" height="382" alt="image" src="https://github.com/user-attachments/assets/b57da631-69fa-4f44-9fc2-ca79b26c8c45" />
@@ -13,8 +11,6 @@
 
 # dev Flow
 <img width="629" height="366" alt="image" src="https://github.com/user-attachments/assets/65fae36c-2c08-46fa-89b4-c761ff2c2631" />
-
-
 
 # frontend
 https://github.com/swcompetintion/frontend
