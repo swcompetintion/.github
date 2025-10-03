@@ -1,3 +1,5 @@
+
+
 # 아키텍쳐
 <img width="647" height="493" alt="image" src="https://github.com/user-attachments/assets/06cbd86e-3910-45d2-86e0-1095c07a306d" />
 
@@ -16,11 +18,11 @@
 
 # frontend
 https://github.com/swcompetintion/frontend
-
+https://www.bed-rock.p-e.kr/
 
 # backend
 https://github.com/swcompetintion/backend
-
+https://api.bed-rock.p-e.kr/
 
 # 수정사항 반영하는 법
 1. 먼저 frontend 레포지토리에서 변경사항이 있을 경우(프런트 레포지토리 변경사항 없으면 안 해도 됨) git push (main 레포지토리로)
