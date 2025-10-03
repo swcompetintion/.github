@@ -32,7 +32,7 @@ https://api.bed-rock.p-e.kr/
 
 
 # 개발환경 설정 하는법
-앞서 우리가 만든 도 커 컨테이너에서 backend, frontend git clone 하면 됨 여기서 배포 환경에 적용하고 싶으면 main으로 push 바로 적용할 거 아니면 다른 브랜치에 push
+앞서 우리가 만든 도 커 컨테이너에서 backend, frontend git clone 하면 됨 여기서 배포 환경에 적용하고 싶으면 main으로 push or 바로 적용할 거 아니면 다른 브랜치에 push
 되도록이면 main에 바로 push 하지 말고 merge 요청 부탁
 
 
