@@ -35,6 +35,59 @@ https://www.notion.so/API-28222a85cf3a80ee8de1e7c9d62609df?source=copy_link
 1. 먼저 frontend 레포지토리에서 변경사항이 있을 경우(프런트 레포지토리 변경사항 없으면 안 해도 됨) git push (main 레포지토리로)
 2. 이후 backend 레포지토리에서 변경사항이 있을 경우(백엔드 레포지토리 변경사항 없으면 안 해도 됨) git push (main 레포지토리로)
 
+# JWT
+
+현 상황 고려
+ 시간(d-day), 자원(aws), 팀 개발 등등 
+~~Refresh는 blacklist 로테이션 사용~~
+~~redis 사용~~
+
+```bash
+
+
+
+프론트 local스토리지 저장
+{
+  "header": {
+    "alg": "HS256",
+    "typ": "JWT"
+  },
+  "payload": {
+    "token_type": "access",
+    "exp": 1696500000,
+    "iat": 1696499700,
+    "sub": "유저아이디",
+    "email": "이메일",
+    "jti": "uuid-access-123"
+  },
+  "signature": "서명값"
+}
+
+프론트 HttpOnly 쿠키
+백엔드 MongoDB에 저장 O (TIL exp랑 똑같이) 만료되면 DB에서도 지우기
+
+httponly=True,
+secure=True,
+samesite='Strict'
+설정 붙여서
+
+{
+  "header": {
+    "alg": "HS256",
+    "typ": "JWT"
+  },
+  "payload": {
+    "token_type": "refresh",
+    "exp": 1696586400,
+    "iat": 1696499700,
+    "sub": "유저아이디",
+    "jti": "uuid-refresh-123"
+  },
+  "signature": "서명값"
+}
+```
+
+
 
 # 개발환경 설정 하는법
 앞서 우리가 만든 도 커 컨테이너에서 backend, frontend git clone 하면 됨 여기서 배포 환경에 적용하고 싶으면 main으로 push or 바로 적용할 거 아니면 다른 브랜치에 push
