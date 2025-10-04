@@ -26,6 +26,10 @@ https://github.com/swcompetintion/backend
 
 https://api.bed-rock.p-e.kr/
 
+
+# API 명세서
+https://www.notion.so/API-28222a85cf3a80ee8de1e7c9d62609df?source=copy_link
+
 # 수정사항 반영하는 법
 1. 먼저 frontend 레포지토리에서 변경사항이 있을 경우(프런트 레포지토리 변경사항 없으면 안 해도 됨) git push (main 레포지토리로)
 2. 이후 backend 레포지토리에서 변경사항이 있을 경우(백엔드 레포지토리 변경사항 없으면 안 해도 됨) git push (main 레포지토리로)
