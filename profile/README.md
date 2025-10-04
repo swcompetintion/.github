@@ -1,4 +1,4 @@
-* 용량 문제로 fastapi만 cd 러너 설정함 *
+# * 용량 문제로 fastapi만 cd 러너 설정함 *
 
 # 아키텍쳐
 <img width="647" height="493" alt="image" src="https://github.com/user-attachments/assets/06cbd86e-3910-45d2-86e0-1095c07a306d" />
