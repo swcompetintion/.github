@@ -7,7 +7,7 @@
 <img width="634" height="278" alt="image" src="https://github.com/user-attachments/assets/ce7d254b-4475-4edf-9eb1-4bc467ca935d" />
 
 # 몽고db 스키마
-<img width="726" height="470" alt="image" src="https://github.com/user-attachments/assets/19bc3067-1a91-4a4c-8997-f29e03e1acf0" />
+<img width="552" height="310" alt="image" src="https://github.com/user-attachments/assets/b9b2e99c-bbe8-4887-b406-796b13e24e4e" />
 
 # 파이단틱 스키마
 <img width="644" height="680" alt="image" src="https://github.com/user-attachments/assets/b65b9b2a-5269-453f-9126-fc50f0385fb2" />
