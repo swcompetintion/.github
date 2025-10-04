@@ -9,6 +9,9 @@
 # 몽고db 스키마
 <img width="726" height="470" alt="image" src="https://github.com/user-attachments/assets/19bc3067-1a91-4a4c-8997-f29e03e1acf0" />
 
+# 파이단틱 스키마
+<img width="644" height="680" alt="image" src="https://github.com/user-attachments/assets/b65b9b2a-5269-453f-9126-fc50f0385fb2" />
+
 # 개발 순서 의존성
 <img width="629" height="366" alt="image" src="https://github.com/user-attachments/assets/65fae36c-2c08-46fa-89b4-c761ff2c2631" />
 
@@ -23,9 +26,7 @@ https://www.bed-rock.p-e.kr/
 https://github.com/swcompetintion/backend
 
 ## link
-
 https://api.bed-rock.p-e.kr/
-
 
 # API 명세서
 https://www.notion.so/API-28222a85cf3a80ee8de1e7c9d62609df?source=copy_link
