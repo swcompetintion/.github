@@ -311,7 +311,7 @@
         </section>
 
         <section id="section-achievement">
-            <h2>엔지니어링으로 혁신한 사용자 경험 & 인프라</h2>
+            <h2>문제 해결 핵심</h2>
             <div class="achievement-grid">
                 <div class="achievement-card">
                     <span class="badge">Performance</span>
@@ -516,6 +516,60 @@
                         </div>
                     </ul>
                 </div>
+
+                <div class="challenge-item">
+                    <h3>04. Google OAuth 2.0 (Security vs Implementation)</h3>
+                    <ul>
+                        <li><strong>상황:</strong> 사용자별 독립적인 일정 공간을 제공하기 위해 보안성이 검증된 인증 시스템이 필요했습니다.</li>
+                        <li><strong>해결:</strong> Google GIS(Google Identity Services)의 **ID Token Backend Verification** 방식을 채택했습니다.</li>
+                        
+                        <!-- Detailed OAuth Flow Architecture -->
+                        <div class="arch-section" style="padding: 25px; margin: 20px 0; background: #fcfcfc;">
+                            <div style="display: flex; flex-direction: column; gap: 15px; max-width: 600px; margin: 0 auto;">
+                                <div style="display: flex; align-items: center; gap: 20px;">
+                                    <div class="arch-node app" style="flex: 1; min-width: 100px;">
+                                        <div class="node-text">Browser / React</div>
+                                        <div style="font-size: 0.65em; color: var(--text-muted);">Google Login UI</div>
+                                    </div>
+                                    <div style="color: var(--primary); font-weight: 900; font-size: 0.8em;">1. ID Token 취득 →</div>
+                                </div>
+                                
+                                <div style="display: flex; align-items: center; gap: 20px; padding-left: 40px;">
+                                    <div style="color: var(--primary); font-weight: 900; font-size: 0.8em;">↓ 2. POST /auths/google-verify {id_token}</div>
+                                </div>
+
+                                <div style="display: flex; align-items: center; gap: 20px;">
+                                    <div class="arch-node infra" style="flex: 1; min-width: 100px;">
+                                        <div class="node-text">FastAPI Backend</div>
+                                        <div style="font-size: 0.65em; color: var(--text-muted);">httpx.AsyncClient</div>
+                                    </div>
+                                    <div style="color: #ea4335; font-weight: 900; font-size: 0.8em;">3. tokeninfo 검증 요청 ⇄</div>
+                                    <div class="arch-node infra" style="border-top-color: #ea4335; flex: 1; min-width: 100px;">
+                                        <div class="node-text">Google OAuth API</div>
+                                        <div style="font-size: 0.65em; color: #ea4335;">Signature & Expiry Check</div>
+                                    </div>
+                                </div>
+
+                                <div style="display: flex; align-items: center; gap: 20px; padding-left: 40px;">
+                                    <div style="color: var(--success); font-weight: 900; font-size: 0.8em;">↓ 4. 200 OK & user_email 추출</div>
+                                </div>
+
+                                <div style="display: flex; align-items: center; gap: 20px;">
+                                    <div class="arch-node app" style="flex: 1; min-width: 100px; border-top-color: var(--success);">
+                                        <div class="node-text">Frontend Session</div>
+                                        <div style="font-size: 0.65em; color: var(--success);">Email as Access Token</div>
+                                    </div>
+                                    <div style="color: var(--success); font-weight: 900; font-size: 0.8em;">← 5. Bearer Token 발급</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="trade-off-container">
+                            <div class="trade-box pros"><strong>Why ID Token?</strong> Authorization Code Flow보다 단계가 간소하여 네트워크 지연을 줄이면서도, 백엔드 검증을 통해 보안성을 유지할 수 있습니다.</div>
+                            <div class="trade-box decision"><strong>Backend Logic</strong> `httpx`를 통해 Google의 `tokeninfo` 엔드포인트를 직접 호출함으로써, 백엔드에서 공개키 로테이션 관리 없이도 신뢰할 수 있는 사용자 정보(Email)를 안전하게 확보했습니다.</div>
+                        </div>
+                    </ul>
+                </div>
             </div>
         </section>
 
@@ -560,6 +614,10 @@
             'CI: Build & Push': { desc: 'GitHub Actions를 통한 자동화 파이프라인.', reason: '코드 품질 검사와 컨테이너 이미지화를 수동 개입 없이 자동 수행.' },
             'Docker': { desc: '컨테이너 가상화 플랫폼.', reason: '개발-테스트-배포 환경 간의 일관성을 보장하기 위해 사용.' },
             'Dockerhub Repo': { desc: '중앙 집중식 도커 이미지 저장소.', reason: '빌드된 결과물을 안전하게 보관하고 배포 서버로 신속하게 전달.' },
+
+            // Auth specific
+            'Google API': { desc: 'Google의 인증 및 리소스 서버.', reason: 'ID Token의 유효성을 검증하고 사용자 프로필 정보를 안전하게 획득하기 위해 사용.' },
+            'tokeninfo': { desc: 'Google OAuth 2.0 토큰 검증 엔드포인트.', reason: '백엔드에서 전달받은 JWT(ID Token)의 서명과 만료 여부를 신뢰할 수 있는 기관에서 검증.' },
 
             // Collaboration
             'Jira': { desc: '애자일 프로젝트 관리 도구.', reason: '3인 팀의 워크플로우를 체계화하여 개발 능률을 극대화.' },
