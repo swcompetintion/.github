@@ -316,17 +316,17 @@
                 <div class="achievement-card">
                     <span class="badge">Performance</span>
                     <span class="title">"Nginx 캐시 버스팅 도입"</span>
-                    <p class="metric">배포 시 정적 파일의 즉각적인 갱신을 위해 **Cache Busting**을 적용했습니다. 사용자 브라우저의 구버전 캐시 문제를 원천 차단하여 일관된 UX를 제공합니다.</p>
+                    <p class="metric">배포 시 정적 파일의 즉각적인 갱신을 위해 Cache Busting을 적용했습니다. 사용자 브라우저의 구버전 캐시 문제를 원천 차단하여 일관된 UX를 제공합니다.</p>
                 </div>
                 <div class="achievement-card">
                     <span class="badge">Collaboration</span>
                     <span class="title">"Jira & GitHub 기반의 높은 능률"</span>
-                    <p class="metric">**Jira**를 통해 전체 워크플로우를 가시화하고, **GitHub Issues**로 코드 레벨의 기술적 병목을 해결하며 팀 개발 생산성을 극대화했습니다.</p>
+                    <p class="metric">Jira를 통해 전체 워크플로우를 가시화하고, GitHub Issues로 코드 레벨의 기술적 병목을 해결하며 팀 개발 생산성을 극대화했습니다.</p>
                 </div>
                 <div class="achievement-card">
                     <span class="badge">Scalability</span>
                     <span class="title">"스키마리스 데이터 모델링"</span>
-                    <p class="metric">**MongoDB**를 채택하여 일정의 다양한 메타데이터를 유연하게 수용했습니다. RDBMS 대비 잦은 기획 변경에도 빠른 대응이 가능한 구조를 갖췄습니다.</p>
+                    <p class="metric">MongoDB를 채택하여 일정의 다양한 메타데이터를 유연하게 수용했습니다. RDBMS 대비 잦은 기획 변경에도 빠른 대응이 가능한 구조를 갖췄습니다.</p>
                 </div>
             </div>
         </section>
@@ -334,7 +334,7 @@
         <section id="section-class">
             <h2>데이터 모델 및 클래스 설계 (Class Architecture)</h2>
             <div class="card">
-                <p style="margin-bottom: 25px;">MongoDB의 유연성을 활용하기 위해 **Pydantic**과 **Beanie ODM**을 결합한 객체 지향적 데이터 모델을 설계했습니다.</p>
+                <p style="margin-bottom: 25px;">MongoDB의 유연성을 활용하기 위해 Pydantic과 Beanie ODM을 결합한 객체 지향적 데이터 모델을 설계했습니다.</p>
                 <div class="class-diagram">
                     <!-- Pydantic Base -->
                     <div class="class-node arch-node" title="Core Base Class">
@@ -494,7 +494,7 @@
                     <h3>01. Nginx 캐시 버스팅 (Performance vs Freshness)</h3>
                     <ul>
                         <li><strong>고민의 시작:</strong> 잦은 업데이트 과정에서 사용자 브라우저에 남은 구버전 캐시로 인해 UI 오동작 현상이 발생했습니다.</li>
-                        <li><strong>해결:</strong> Nginx 설정과 빌드 해시를 결합한 **캐시 버스팅** 전략을 도입했습니다.</li>
+                        <li><strong>해결:</strong> Nginx 설정과 빌드 해시를 결합한 캐시 버스팅 전략을 도입했습니다.</li>
                         <div class="trade-off-container">
                             <div class="trade-box pros"><strong>Pros</strong> 배포 즉시 최신 버전 서비스 보장, 구버전 리소스 호출로 인한 에러 원천 차단</div>
                             <div class="trade-box decision"><strong>Decision</strong> 브라우저 캐싱의 성능 이점은 유지하면서도 데이터의 신선도를 완벽하게 보장했습니다.</div>
@@ -506,7 +506,7 @@
                     <h3>02. MongoDB 선택 (Flexibility vs ACID)</h3>
                     <ul>
                         <li><strong>상황:</strong> 일정 관리 특성상 사용자가 커스텀 태그나 메모를 유연하게 추가해야 했습니다.</li>
-                        <li><strong>해결:</strong> **MongoDB**를 채택하고 `extra='allow'` 옵션으로 스키마리스의 장점을 극대화했습니다.</li>
+                        <li><strong>해결:</strong> MongoDB를 채택하고 `extra='allow'` 옵션으로 스키마리스의 장점을 극대화했습니다.</li>
                         <div class="trade-off-container">
                             <div class="trade-box pros"><strong>Pros</strong> 복잡한 Migration 없는 빠른 피처 추가 가능, JSON 중심의 생산성 향상</div>
                             <div class="trade-box cons"><strong>Trade-off</strong> 트랜잭션의 엄격함은 줄어들지만, 일관성보다 유연한 데이터 확장이 핵심인 도메인 특성을 반영했습니다.</div>
@@ -518,7 +518,7 @@
                     <h3>03. 하이브리드 협업 (Jira & GitHub Issues)</h3>
                     <ul>
                         <li><strong>상황:</strong> 3명의 팀원이 각기 다른 모듈을 개발하면서 전체 지연을 방지하고 코드 레벨 이슈를 명확히 관리해야 했습니다.</li>
-                        <li><strong>해결:</strong> **Jira**(프로젝트 관리)와 **GitHub Issues**(기술 트래킹)를 결합했습니다.</li>
+                        <li><strong>해결:</strong> Jira(프로젝트 관리)와 GitHub Issues(기술 트래킹)를 결합했습니다.</li>
                         <div class="trade-off-container">
                             <div class="trade-box pros"><strong>Jira</strong> 칸반 보드를 통한 전체 마일스톤 및 작업 진행 가시화</div>
                             <div class="trade-box pros"><strong>GitHub Issues</strong> 코드 리뷰 및 PR과 연동된 정밀한 버그 수정 프로세스 확립</div>
@@ -542,7 +542,7 @@
                     <h3>04. Google OAuth 2.0 (Security vs Implementation)</h3>
                     <ul>
                         <li><strong>상황:</strong> 사용자별 독립적인 일정 공간을 제공하기 위해 보안성이 검증된 인증 시스템이 필요했습니다.</li>
-                        <li><strong>해결:</strong> Google GIS(Google Identity Services)의 **ID Token Backend Verification** 방식을 채택했습니다.</li>
+                        <li><strong>해결:</strong> Google GIS(Google Identity Services)의 ID Token Backend Verification 방식을 채택했습니다.</li>
                         
                         <!-- Detailed OAuth Flow Architecture -->
                         <div class="arch-section" style="padding: 25px; margin: 20px 0; background: #fcfcfc;">
@@ -595,7 +595,7 @@
         </section>
 
         <div class="footer">
-            &copy; 2026 Bedrock Planner Project. <br> 전략적 엔지니어링과 협업으로 가치를 만드는 여정입니다.
+            &copy; 2026 Bedrock Planner Project.
         </div>
     </div>
 
