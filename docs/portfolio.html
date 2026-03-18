@@ -244,30 +244,6 @@
         .trade-box.cons { background-color: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
         .trade-box.decision { background-color: #fefce8; border: 1px solid #fef08a; color: #854d0e; }
 
-        /* Tooltip Insight */
-        #tech-insight {
-            position: fixed; display: none; z-index: 3000; background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px); border: 1px solid var(--primary); border-radius: 12px;
-            padding: 16px; width: 280px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); pointer-events: none; font-size: 0.85em;
-        }
-        .insight-title { color: var(--primary); font-weight: 800; margin-bottom: 8px; font-size: 1.1em; }
-        .insight-reason { background: var(--primary-light); padding: 8px; border-radius: 6px; color: var(--primary-dark); font-weight: 600; margin-top: 8px; }
-
-        /* Side Guide */
-        .side-guide { position: fixed; bottom: 40px; right: 40px; z-index: 2500; display: flex; flex-direction: column; align-items: flex-end; pointer-events: none; }
-        .speech-bubble {
-            background: white; border: 2px solid var(--primary); border-radius: 18px; padding: 12px 18px;
-            margin-bottom: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-width: 220px;
-            font-size: 0.9em; font-weight: 700; color: var(--text-main); opacity: 0; transform: translateY(10px); transition: all 0.4s;
-        }
-        .speech-bubble.active { opacity: 1; transform: translateY(0); }
-        .character-img {
-            width: 70px; height: 70px; background: var(--primary); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; color: white;
-            box-shadow: 0 5px 15px rgba(9, 132, 227, 0.3); animation: float 3s ease-in-out infinite;
-        }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-
         .footer { text-align: center; margin-top: 80px; color: var(--secondary); font-size: 0.9em; padding-bottom: 40px; }
 
         @media (max-width: 768px) {
@@ -277,17 +253,6 @@
     </style>
 </head>
 <body>
-    <div id="tech-insight">
-        <div class="insight-title"></div>
-        <div class="insight-desc"></div>
-        <div class="insight-reason"></div>
-    </div>
-
-    <div class="side-guide">
-        <div class="speech-bubble" id="guide-bubble">Bedrock Planner 클라우드 아키텍처 투어를 시작합니다.</div>
-        <div class="character-img"><strong>PLAN</strong></div>
-    </div>
-
     <div class="container">
         <header id="section-hero">
             <h1>클라우드 기반의 드래그 앤 드롭<br>인터랙티브 스케줄링 시스템</h1>
@@ -327,6 +292,11 @@
                     <span class="badge">Scalability</span>
                     <span class="title">"스키마리스 데이터 모델링"</span>
                     <p class="metric">MongoDB를 채택하여 일정의 다양한 메타데이터를 유연하게 수용했습니다. RDBMS 대비 잦은 기획 변경에도 빠른 대응이 가능한 구조를 갖췄습니다.</p>
+                </div>
+                <div class="achievement-card">
+                    <span class="badge">Security</span>
+                    <span class="title">"OAuth 2.0 보안 인증 도입"</span>
+                    <p class="metric">Google ID Token 백엔드 검증 방식을 도입하여 보안성과 인증 속도를 동시에 개선했습니다. 사용자별 독립적인 데이터 공간을 안전하게 확보하는 기반이 되었습니다.</p>
                 </div>
             </div>
         </section>
@@ -600,116 +570,6 @@
     </div>
 
     <script>
-        // Insight Data
-        const techData = {
-            // Class Architecture
-            'Plan (Pydantic BaseModel)': { desc: '모든 일정 데이터의 근간이 되는 베이스 클래스.', reason: 'Pydantic을 사용하여 런타임 데이터 검증과 타입 안정성을 동시에 확보.' },
-            'PlanModel (Beanie Document)': { desc: 'MongoDB에 저장되는 실제 문서 모델.', reason: 'Beanie Document를 상속받아 비동기 쿼리와 Pydantic의 장점을 결합.' },
-            'API Schemas': { desc: '클라이언트 통신을 위한 데이터 변환 레이어.', reason: 'DB 모델과 API 스펙을 분리하여 내부 데이터 구조 노출 방지 및 보안 강화.' },
-            'Database Wrapper': { desc: 'DB 접근 로직을 캡슐화한 유틸리티 클래스.', reason: '비즈니스 로직과 데이터 저장 로직을 분리하여 유지보수성 향상.' },
-
-            // Frontend
-            'React 18': { desc: '컴포넌트 기반 UI 라이브러리.', reason: 'Concurrent Mode를 활용한 부드러운 차트 렌더링을 위해 선택.' },
-            'Frontend SPA': { desc: 'React 기반 단일 페이지 애플리케이션.', reason: 'CSR 방식을 통해 빠른 화면 전환과 풍부한 사용자 인터랙션 제공.' },
-            'TypeScript': { desc: '정적 타입이 지원되는 JavaScript.', reason: '차트 설정 및 데이터 객체의 구조적 에러를 사전에 방지.' },
-            'Google OAuth 2.0': { desc: '글로벌 표준 인증 프로토콜.', reason: '보안성과 사용자 편의성을 동시에 잡기 위한 핵심 선택.' },
-            'JWT Decoding': { desc: '토큰 기반 사용자 정보 추출.', reason: '프론트엔드에서 실시간으로 사용자 프로필을 반영하기 위해 활용.' },
-            'Chart.js': { desc: 'Canvas 기반 데이터 시각화 라이브러리.', reason: '대량의 일정 데이터를 브라우저 부하 없이 렌더링하기 위해 채택.' },
-            'React DnD': { desc: '드래그 앤 드롭 구현 라이브러리.', reason: '외부 태그와 차트 내부 데이터 간의 유연한 인터랙션을 위해 사용.' },
-
-            // Backend
-            'FastAPI': { desc: '비동기 기반 고성능 웹 프레임워크.', reason: 'Python 비동기 생태계의 장점을 극대화하여 API 성능 확보.' },
-            'FastAPI Server': { desc: 'Uvicorn 기반의 비동기 API 서버.', reason: '클라우드 환경에서 적은 리소스로 대량의 동시 요청을 처리.' },
-            'Python 3.10+': { desc: '현대적인 범용 프로그래밍 언어.', reason: '강력한 타입 힌트와 비동기 문법을 활용한 가독성 및 성능 확보.' },
-            'Pydantic v2': { desc: '데이터 검증 및 직렬화 라이브러리.', reason: 'API 스키마의 엄격한 검증과 빠른 데이터 변환을 위해 사용.' },
-            'Beanie ODM': { desc: '비동기 Python MongoDB ODM.', reason: 'Pydantic 기반 상속 구조를 통해 NoSQL 환경에서도 강력한 타입 안정성 제공.' },
-            'Asyncio': { desc: '비동기 I/O 프레임워크.', reason: '논블로킹 방식으로 대량의 요청을 효율적으로 처리하기 위한 핵심 기술.' },
-
-            // Infra/DevOps
-            'AWS EC2': { desc: '탄력적인 클라우드 가상 서버.', reason: 'Docker를 통한 유연한 서버 운영과 인프라 제어권을 위해 선택.' },
-            'Nginx': { desc: '고성능 리버스 프록시 및 웹 서버.', reason: '보안 레이어 강화 및 캐시 버스팅을 통한 정적 자원 최신성 보장.' },
-            'Nginx (Cache Busting)': { desc: '캐시 제어 전략이 적용된 웹 서버.', reason: '정적 파일의 캐시를 즉시 갱신하여 배포 후 UI 깨짐 현상을 방지.' },
-            'MongoDB Atlas': { desc: '매니지드 NoSQL 서비스.', reason: '서버 자원을 아끼고 데이터 영속성을 전문 서비스에 위임하여 안정성 확보.' },
-            'External DB Cluster': { desc: '클라우드상에 분리된 MongoDB 클러스터.', reason: 'AWS EC2의 부담을 줄이고 안정적인 고가용성 데이터 저장소 확보.' },
-            'GitHub Actions': { desc: 'CI/CD 자동화 플랫폼.', reason: '코드 변경 시 즉각적으로 Docker 이미지를 빌드/배포하여 효율 극대화.' },
-            'CI: Build & Push': { desc: 'GitHub Actions를 통한 자동화 파이프라인.', reason: '코드 품질 검사와 컨테이너 이미지화를 수동 개입 없이 자동 수행.' },
-            'Docker': { desc: '컨테이너 가상화 플랫폼.', reason: '개발-테스트-배포 환경 간의 일관성을 보장하기 위해 사용.' },
-            'Dockerhub Repo': { desc: '중앙 집중식 도커 이미지 저장소.', reason: '빌드된 결과물을 안전하게 보관하고 배포 서버로 신속하게 전달.' },
-
-            // Auth specific
-            'Google API': { desc: 'Google의 인증 및 리소스 서버.', reason: 'ID Token의 유효성을 검증하고 사용자 프로필 정보를 안전하게 획득하기 위해 사용.' },
-            'tokeninfo': { desc: 'Google OAuth 2.0 토큰 검증 엔드포인트.', reason: '백엔드에서 전달받은 JWT(ID Token)의 서명과 만료 여부를 신뢰할 수 있는 기관에서 검증.' },
-
-            // Collaboration
-            'Jira': { desc: '애자일 프로젝트 관리 도구.', reason: '3인 팀의 워크플로우를 체계화하여 개발 능률을 극대화.' },
-            'GitHub Issues': { desc: '코드 중심 이슈 트래킹 시스템.', reason: '코드 레벨의 기술적 병목과 버그를 정밀하게 관리.' },
-            'Makefile': { desc: '빌드 자동화 도구.', reason: '복잡한 Docker 및 환경 설정 명령어를 단축 명령어로 관리.' }
-        };
-
-        const insightEl = document.getElementById('tech-insight');
-        const insightTitle = insightEl.querySelector('.insight-title');
-        const insightDesc = insightEl.querySelector('.insight-desc');
-        const insightReason = insightEl.querySelector('.insight-reason');
-
-        document.addEventListener('mouseover', (e) => {
-            const target = e.target.closest('.chip, .arch-node');
-            if (target) {
-                // Get header text if it's a class node, otherwise use primary text
-                const text = target.querySelector('.class-header')?.innerText || 
-                             target.querySelector('.node-text')?.innerText || 
-                             target.innerText.trim();
-                
-                const data = techData[text] || Object.entries(techData).find(([key]) => text.includes(key))?.[1];
-                
-                if (data) {
-                    insightTitle.innerText = text;
-                    insightDesc.innerText = data.desc;
-                    insightReason.innerText = "💡 선택 이유: " + data.reason;
-                    insightEl.style.display = 'block';
-                }
-            }
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            if (insightEl.style.display === 'block') {
-                const x = e.clientX + 15;
-                const y = e.clientY + 15;
-                const rightEdge = window.innerWidth - 300;
-                insightEl.style.left = (x > rightEdge ? x - 310 : x) + 'px';
-                insightEl.style.top = y + 'px';
-            }
-        });
-
-        document.addEventListener('mouseout', (e) => {
-            if (e.target.closest('.chip, .arch-node')) insightEl.style.display = 'none';
-        });
-
-        // Guide Character
-        const guideBubble = document.getElementById('guide-bubble');
-        const guideComments = {
-            'section-hero': 'Jira와 GitHub Issues로 협업 능률을 극대화한 프로젝트입니다.',
-            'section-demo': '실시간 시각화 인터랙션을 직접 확인해보세요.',
-            'section-achievement': '캐시 버스팅과 NoSQL 도입으로 달성한 기술적 성과입니다.',
-            'section-class': '클래스 다이어그램의 각 박스에 마우스를 올려 상세 설계 의도를 확인해보세요.',
-            'section-tech': '협업 도구부터 클라우드 인프라까지 전체 기술 스택입니다.',
-            'section-arch': '아키텍처 각 노드에 마우스를 올려 상세 선택 이유를 확인해보세요.',
-            'section-challenges': 'Nginx 캐시 전략과 협업 방식에 대한 심도 있는 의사결정입니다.'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && guideComments[entry.target.id]) {
-                    guideBubble.classList.remove('active');
-                    setTimeout(() => {
-                        guideBubble.innerText = guideComments[entry.target.id];
-                        guideBubble.classList.add('active');
-                    }, 100);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        document.querySelectorAll('section, header').forEach(el => observer.observe(el));
-        setTimeout(() => guideBubble.classList.add('active'), 500);
     </script>
 </body>
 </html>
