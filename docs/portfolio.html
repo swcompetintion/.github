@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>포트폴리오 | Interactive Cloud Scheduling System</title>
+    <title>Bedrock Planner | Interactive Cloud Scheduling System</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
     <style>
         :root {
@@ -246,6 +246,27 @@
 
         .footer { text-align: center; margin-top: 80px; color: var(--secondary); font-size: 0.9em; padding-bottom: 40px; }
 
+        /* Custom Tooltip Styles */
+        .custom-tooltip {
+            position: absolute;
+            z-index: 1000;
+            background: rgba(45, 52, 54, 0.98);
+            color: white;
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            max-width: 280px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            pointer-events: none;
+            display: none;
+            line-height: 1.6;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(4px);
+        }
+        .custom-tooltip .tooltip-desc { font-weight: 800; margin-bottom: 8px; display: block; color: #74b9ff; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 6px; }
+        .custom-tooltip .tooltip-reason { color: #dfe6e9; display: block; font-size: 0.95em; }
+        .custom-tooltip .tooltip-reason::before { content: '💡 '; }
+
         @media (max-width: 768px) {
             h1 { font-size: 2.2em; }
             .container { padding: 40px 15px; }
@@ -257,7 +278,7 @@
         <header id="section-hero">
             <h1>클라우드 기반의 드래그 앤 드롭<br>인터랙티브 스케줄링 시스템</h1>
             <div class="project-meta">
-                <div class="meta-item"><strong>Journey</strong> 2025.09 ~ 2025.12</div>
+                <div class="meta-item"><strong>Journey</strong> 2025.09 - 2025.12</div>
                 <div class="meta-item"><strong>Team</strong> 3인 공동 개발 (배포 & 보안 & 시스템 설계를 맡았습니다.)</div>
                 <div class="meta-item"><strong>Organization</strong> <a href="https://github.com/swcompetintion" target="_blank">swcompetintion</a></div>
             </div>
@@ -570,6 +591,90 @@
     </div>
 
     <script>
+        const techData = {
+            'Plan (Pydantic BaseModel)': { desc: '모든 일정 데이터의 근간이 되는 베이스 클래스.', reason: 'Pydantic을 사용하여 런타임 데이터 검증과 타입 안정성을 동시에 확보.' },
+            'PlanModel (Beanie Document)': { desc: 'MongoDB에 저장되는 실제 문서 모델.', reason: 'Beanie Document를 상속받아 비동기 쿼리와 Pydantic의 장점을 결합.' },
+            'API Schemas': { desc: '클라이언트 통신을 위한 데이터 변환 레이어.', reason: 'DB 모델과 API 스펙을 분리하여 내부 데이터 구조 노출 방지 및 보안 강화.' },
+            'Database Wrapper': { desc: 'DB 접근 로직을 캡슐화한 유틸리티 클래스.', reason: '비즈니스 로직과 데이터 저장 로직을 분리하여 유지보수성 향상.' },
+            'React 18': { desc: '컴포넌트 기반 UI 라이브러리.', reason: 'Concurrent Mode를 활용한 부드러운 차트 렌더링을 위해 선택.' },
+            'Frontend SPA': { desc: 'React 기반 단일 페이지 애플리케이션.', reason: 'CSR 방식을 통해 빠른 화면 전환과 풍부한 사용자 인터랙션 제공.' },
+            'TypeScript': { desc: '정적 타입이 지원되는 JavaScript.', reason: '차트 설정 및 데이터 객체의 구조적 에러를 사전에 방지.' },
+            'Google OAuth 2.0': { desc: '글로벌 표준 인증 프로토콜.', reason: '보안성과 사용자 편의성을 동시에 잡기 위한 핵심 선택.' },
+            'JWT Decoding': { desc: '토큰 기반 사용자 정보 추출.', reason: '프론트엔드에서 실시간으로 사용자 프로필을 반영하기 위해 활용.' },
+            'Chart.js': { desc: 'Canvas 기반 데이터 시각화 라이브러리.', reason: '대량의 일정 데이터를 브라우저 부하 없이 렌더링하기 위해 채택.' },
+            'React DnD': { desc: '드래그 앤 드롭 구현 라이브러리.', reason: '외부 태그와 차트 내부 데이터 간의 유연한 인터랙션을 위해 사용.' },
+            'FastAPI': { desc: '비동기 기반 고성능 웹 프레임워크.', reason: 'Python 비동기 생태계의 장점을 극대화하여 API 성능 확보.' },
+            'FastAPI Server': { desc: 'Uvicorn 기반의 비동기 API 서버.', reason: '클라우드 환경에서 적은 리소스로 대량의 동시 요청을 처리.' },
+            'Python 3.10+': { desc: '현대적인 범용 프로그래밍 언어.', reason: '강력한 타입 힌트와 비동기 문법을 활용한 가독성 및 성능 확보.' },
+            'Pydantic v2': { desc: '데이터 검증 및 직렬화 라이브러리.', reason: 'API 스키마의 엄격한 검증과 빠른 데이터 변환을 위해 사용.' },
+            'Beanie ODM': { desc: '비동기 Python MongoDB ODM.', reason: 'Pydantic 기반 상속 구조를 통해 NoSQL 환경에서도 강력한 타입 안정성 제공.' },
+            'Asyncio': { desc: '비동기 I/O 프레임워크.', reason: '논블로킹 방식으로 대량의 요청을 효율적으로 처리하기 위한 핵심 기술.' },
+            'AWS EC2': { desc: '탄력적인 클라우드 가상 서버.', reason: 'Docker를 통한 유연한 서버 운영과 인프라 제어권을 위해 선택.' },
+            'Nginx': { desc: '고성능 리버스 프록시 및 웹 서버.', reason: '보안 레이어 강화 및 캐시 버스팅을 통한 정적 자원 최신성 보장.' },
+            'Nginx (Cache Busting)': { desc: '캐시 제어 전략이 적용된 웹 서버.', reason: '정적 파일의 캐시를 즉시 갱신하여 배포 후 UI 깨짐 현상을 방지.' },
+            'MongoDB Atlas': { desc: '매니지드 NoSQL 서비스.', reason: '서버 자원을 아끼고 데이터 영속성을 전문 서비스에 위임하여 안정성 확보.' },
+            'External DB Cluster': { desc: '클라우드상에 분리된 MongoDB 클러스터.', reason: 'AWS EC2의 부담을 줄이고 안정적인 고가용성 데이터 저장소 확보.' },
+            'GitHub Actions': { desc: 'CI/CD 자동화 플랫폼.', reason: '코드 변경 시 즉각적으로 Docker 이미지를 빌드/배포하여 효율 극대화.' },
+            'CI: Build & Push': { desc: 'GitHub Actions를 통한 자동화 파이프라인.', reason: '코드 품질 검사와 컨테이너 이미지화를 수동 개입 없이 자동 수행.' },
+            'Docker': { desc: '컨테이너 가상화 플랫폼.', reason: '개발-테스트-배포 환경 간의 일관성을 보장하기 위해 사용.' },
+            'Dockerhub Repo': { desc: '중앙 집중식 도커 이미지 저장소.', reason: '빌드된 결과물을 안전하게 보관하고 배포 서버로 신속하게 전달.' },
+            'Google API': { desc: 'Google의 인증 및 리소스 서버.', reason: 'ID Token의 유효성을 검증하고 사용자 프로필 정보를 안전하게 획득하기 위해 사용.' },
+            'tokeninfo': { desc: 'Google OAuth 2.0 토큰 검증 엔드포인트.', reason: '백엔드에서 전달받은 JWT(ID Token)의 서명과 만료 여부를 신뢰할 수 있는 기관에서 검증.' },
+            'Jira': { desc: '애자일 프로젝트 관리 도구.', reason: '3인 팀의 워크플로우를 체계화하여 개발 능률을 극대화.' },
+            'GitHub Issues': { desc: '코드 중심 이슈 트래킹 시스템.', reason: '코드 레벨의 기술적 병목과 버그를 정밀하게 관리.' },
+            'Makefile': { desc: '빌드 자동화 도구.', reason: '복잡한 Docker 및 환경 설정 명령어를 단축 명령어로 관리.' }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'custom-tooltip';
+            document.body.appendChild(tooltip);
+
+            const interactiveElements = document.querySelectorAll('.chip, .arch-node, .class-node');
+
+            interactiveElements.forEach(el => {
+                let key = '';
+                
+                // 텍스트 추출 로직
+                if (el.classList.contains('chip')) {
+                    key = el.textContent.trim();
+                } else if (el.querySelector('.class-header')) {
+                    key = el.querySelector('.class-header').textContent.trim();
+                } else if (el.querySelector('.node-text')) {
+                    key = el.querySelector('.node-text').textContent.trim();
+                }
+
+                if (techData[key]) {
+                    el.style.cursor = 'help';
+                    
+                    el.addEventListener('mouseenter', (e) => {
+                        tooltip.innerHTML = `
+                            <span class="tooltip-desc">${techData[key].desc}</span>
+                            <span class="tooltip-reason">${techData[key].reason}</span>
+                        `;
+                        tooltip.style.display = 'block';
+                    });
+
+                    el.addEventListener('mousemove', (e) => {
+                        const padding = 15;
+                        let x = e.pageX + padding;
+                        let y = e.pageY + padding;
+
+                        // 화면 우측/하단 넘침 방지
+                        if (x + 280 > window.innerWidth + window.scrollX) {
+                            x = e.pageX - 300;
+                        }
+                        
+                        tooltip.style.left = x + 'px';
+                        tooltip.style.top = y + 'px';
+                    });
+
+                    el.addEventListener('mouseleave', () => {
+                        tooltip.style.display = 'none';
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
