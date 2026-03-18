@@ -378,8 +378,8 @@
                 </div>
                 <div style="margin-top: 25px;">
                     <ul>
-                        <li><strong>상속 구조:</strong> 공통 필드는 `Plan` 베이스 클래스에 정의하고, DB 영속성이 필요한 필드는 `PlanModel`에서 확장하여 중복을 제거했습니다.</li>
-                        <li><strong>유연한 확장:</strong> `extra='allow'` 설정을 통해 런타임에 동적으로 추가되는 일정 속성(NoSQL 장점)을 객체 레벨에서 수용합니다.</li>
+                        <li><strong>상속 구조:</strong> 공통 필드는 Plan 베이스 클래스에 정의하고, DB 영속성이 필요한 필드는 PlanModel에서 확장하여 중복을 제거했습니다.</li>
+                        <li><strong>유연한 확장:</strong> extra='allow' 설정을 통해 런타임에 동적으로 추가되는 일정 속성(NoSQL 장점)을 객체 레벨에서 수용합니다.</li>
                         <li><strong>관심사 분리:</strong> API 요청/응답(Schema)과 실제 DB 모델(Document)을 분리하여 보안 및 데이터 정합성을 유지합니다.</li>
                     </ul>
                 </div>
@@ -497,7 +497,7 @@
                     <h3>02. MongoDB 선택 (Flexibility vs ACID)</h3>
                     <ul>
                         <li><strong>상황:</strong> 일정 관리 특성상 사용자가 커스텀 태그나 메모를 유연하게 추가해야 했습니다.</li>
-                        <li><strong>해결:</strong> MongoDB를 채택하고 `extra='allow'` 옵션으로 스키마리스의 장점을 극대화했습니다.</li>
+                        <li><strong>해결:</strong> MongoDB를 채택하고 extra='allow' 옵션으로 스키마리스의 장점을 극대화했습니다.</li>
                         <div class="trade-off-container">
                             <div class="trade-box pros"><strong>Pros</strong> 복잡한 Migration 없는 빠른 피처 추가 가능, JSON 중심의 생산성 향상</div>
                             <div class="trade-box cons"><strong>Trade-off</strong> 트랜잭션의 엄격함은 줄어들지만, 일관성보다 유연한 데이터 확장이 핵심인 도메인 특성을 반영했습니다.</div>
@@ -578,7 +578,7 @@
 
                         <div class="trade-off-container">
                             <div class="trade-box pros"><strong>Why ID Token?</strong> Authorization Code Flow보다 단계가 간소하여 네트워크 지연을 줄이면서도, 백엔드 검증을 통해 보안성을 유지할 수 있습니다.</div>
-                            <div class="trade-box decision"><strong>Backend Logic</strong> `httpx`를 통해 Google의 `tokeninfo` 엔드포인트를 직접 호출함으로써, 백엔드에서 공개키 로테이션 관리 없이도 신뢰할 수 있는 사용자 정보(Email)를 안전하게 확보했습니다.</div>
+                            <div class="trade-box decision"><strong>Backend Logic</strong> httpx를 통해 Google의 tokeninfo 엔드포인트를 직접 호출함으로써, 백엔드에서 공개키 로테이션 관리 없이도 신뢰할 수 있는 사용자 정보(Email)를 안전하게 확보했습니다.</div>
                         </div>
                     </ul>
                 </div>
@@ -648,10 +648,10 @@
                     el.style.cursor = 'help';
                     
                     el.addEventListener('mouseenter', (e) => {
-                        tooltip.innerHTML = `
+                        tooltip.innerHTML = 
                             <span class="tooltip-desc">${techData[key].desc}</span>
                             <span class="tooltip-reason">${techData[key].reason}</span>
-                        `;
+                        ;
                         tooltip.style.display = 'block';
                     });
 
